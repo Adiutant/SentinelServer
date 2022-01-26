@@ -25,7 +25,8 @@ public:
 
     void incomingConnection(qintptr handle);
 private:
-
+    const QString NEW_CLIENT_SIGNATURE = "NEW_CLIENT_ATTACHED";
+    const QString NEW_CLIENT_SIGNATURE_ACCEPTED = "NEW_CLIENT_ATTACHED_YES";
 
 
 };
