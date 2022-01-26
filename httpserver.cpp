@@ -1,7 +1,8 @@
 #include "httpserver.h"
 
 
-HttpServer::HttpServer(QObject *parent): QTcpServer(parent){
+HttpServer::HttpServer(QObject *parent): QTcpServer(parent)
+{
         if (listen(QHostAddress::Any,80))
         {
             qDebug() << "Server started";
@@ -19,7 +20,8 @@ HttpServer::~HttpServer()
 }
 
 
-void HttpServer::onReadyRead(){
+void HttpServer::onReadyRead()
+{
     QTcpSocket* handlingSocket = qobject_cast<QTcpSocket*>(sender());
     qDebug() << handlingSocket->readAll();
     QString response;
