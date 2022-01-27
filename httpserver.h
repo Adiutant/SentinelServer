@@ -9,6 +9,8 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QUrl>
+#include <string>
+#include <QRegExp>
 
 class HttpServer :public QTcpServer
 {
@@ -25,6 +27,7 @@ public:
 
     void incomingConnection(qintptr handle);
 private:
+    QString parseContent(QString row);
     const QString NEW_CLIENT_SIGNATURE = "NEW_CLIENT_ATTACHED";
     const QString NEW_CLIENT_SIGNATURE_ACCEPTED = "NEW_CLIENT_ATTACHED_YES";
 

@@ -3,6 +3,6 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    HttpServer mainServer();
+    HttpServer mainServer;
     return a.exec();
 }
