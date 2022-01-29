@@ -39,23 +39,51 @@ QString HttpServer::parseContent(QString row)
 
 void HttpServer::onReadyRead()
 {
+    QJsonDocument responseDocument;
+    QByteArray response ;
     QTcpSocket* handlingSocket = qobject_cast<QTcpSocket*>(sender());
     QString content;
-     QString response;
-    QString  line = handlingSocket->readLine();
-    while(line != "")
+    QByteArray incomingRequest = handlingSocket->readAll();
+    QJsonParseError error;
+    QJsonDocument document = QJsonDocument::fromJson(incomingRequest,&error);
+    qDebug()<<error.errorString() << error.offset <<error.error;
+    QJsonObject root  = document.object();
+    if (root["request"] == NEW_CLIENT_SIGNATURE)
     {
-        content = parseContent(line);
-        if (content == NEW_CLIENT_SIGNATURE)
-        {
-            QString responseBody = NEW_CLIENT_SIGNATURE_ACCEPTED;
-            response = "HTTP/1.1 200 OK\r\n\r\n";
-            response+=responseBody;
-        }
-        qDebug() << line<<"::"<<content;
-        line = handlingSocket->readLine();
+        QJsonObject responseObject;
+
+        responseObject["response"] = NEW_CLIENT_SIGNATURE_ACCEPTED;
+
+        responseDocument.setObject(responseObject);
+        response = responseDocument.toJson();
+
     }
-    handlingSocket->write(response.toUtf8());
+    if (root["request"] == LOGIN_CLIENT_SIGNATURE)
+    {
+        //implement db credentials checking and access token generating
+        QJsonObject responseObject;
+
+        responseObject["response"] = NEW_CLIENT_SIGNATURE_ACCEPTED;
+
+        responseDocument.setObject(responseObject);
+        response = responseDocument.toJson();
+
+    }
+    qDebug() << incomingRequest;
+//    while(handlingSocket->canReadLine())
+//    {
+//        QString line = handlingSocket->readLine();
+//        content = parseContent(line);
+//        if (content == NEW_CLIENT_SIGNATURE)
+//        {
+//            QString responseBody = NEW_CLIENT_SIGNATURE_ACCEPTED;
+//            response = "HTTP/1.1 200 OK\r\n\r\n";
+//            response+=responseBody;
+//        }
+//        qDebug() << line<<"::"<<content;
+
+//    }
+    handlingSocket->write(response);
     handlingSocket->disconnectFromHost();
 
 }
