@@ -15,6 +15,7 @@
 #include <QJsonObject>
 #include <QJsonParseError>
 #include <vector>
+#include "RSA.h"
 
 class HttpServer :public QTcpServer
 {

@@ -17,9 +17,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    httpserver.cpp
+    httpserver.cpp \
+    bigint/BigInteger.cc \
+    bigint/BigIntegerAlgorithms.cc \
+    bigint/BigIntegerUtils.cc \
+    bigint/BigUnsigned.cc \
+    bigint/BigUnsignedInABase.cc \
+    RSA.cpp
 
 FORMS +=
 
-HEADERS += \
-    httpserver.h
+HEADERS += \ 
+    bigint/BigInteger.hh \
+    bigint/BigIntegerAlgorithms.hh \
+    bigint/BigIntegerLibrary.hh \
+    bigint/BigIntegerUtils.hh \
+    bigint/BigUnsigned.hh \
+    bigint/BigUnsignedInABase.hh \
+    bigint/NumberlikeArray.hh \
+    httpserver.h \
+    RSA.h
+
+DISTFILES +=
