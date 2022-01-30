@@ -13,6 +13,8 @@ private:
     double _openExponent;
     double _modulus;
     double _closedExponent;
+    double _externalExponent;
+    double _externalModulus;
     //BigInteger Pow(BigInteger &value, BigInteger exponent);
 
 public:

@@ -36,9 +36,9 @@ string RSA::createCyphertext(std::string &plainText) {
 
     for (int i = 0 ; i< plainText.size();i++)
     {
-        double temp = pow(plainText[i],_openExponent);
+        double temp = pow(plainText[i],_externalExponent);
 
-        resultVec.push_back(fmod(temp , _modulus));
+        resultVec.push_back(fmod(temp , _externalModulus));
 
     }
     string str;
